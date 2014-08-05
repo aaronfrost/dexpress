@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Simple Search</title>
+  <script src="js/bower_components/angular/angular.min.js"></script>
+  <script src="js/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="js/index.js"></script>
+</head>
+<body ng-controller="MainCtrl">
+  <h1>Enter a seach term</h1>
+  <input type="text" ng-model="searchTerm"/>
+
+  <fieldset>
+    <legend>Results ({{results.length || 0}})</legend>
+    <div ng-repeat="item in results">{{item.name}}</div>
+  </fieldset>
+</body>
+</html>
