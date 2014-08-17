@@ -8,12 +8,27 @@
   <script src="js/index.js"></script>
 </head>
 <body ng-controller="MainCtrl">
-  <h1>Enter a seach term</h1>
-  <input type="text" ng-model="searchTerm"/>
 
-  <fieldset>
-    <legend>Results ({{results.length || 0}})</legend>
-    <div ng-repeat="item in results">{{item.name}}</div>
-  </fieldset>
+<label for="userid">UserId: <input type="text" id="userid" name="userid" placeholder="enter your userid" ng-model="userId"/></label>
+
+<label for="message">Message:
+  <input type="text" id="message" placeholder="enter a message" ng-model="newMessage"/>
+  <input type="button" value="Send"
+         ng-click="saveNewMessage()"
+         ng-disabled="!newMessage || !userId"/>
+</label>
+
+<fieldset>
+  <legend>Messages ({{messages.length}})</legend>
+  <div ng-repeat="message in messages | orderBy:'created'"><strong>{{message.username}}: </strong> <i>{{message.message}}</i><BR><BR></div>
+</fieldset>
+
+  <!--<h1>Enter a seach term</h1>-->
+  <!--<input type="text" ng-model="searchTerm"/>-->
+
+  <!--<fieldset>-->
+    <!--<legend>Results ({{results.length || 0}})</legend>-->
+    <!--<div ng-repeat="item in results">{{item.name}}</div>-->
+  <!--</fieldset>-->
 </body>
 </html>

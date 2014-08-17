@@ -2,23 +2,28 @@ angular.module('app', []);
 
 angular.module('app').controller('MainCtrl', function($scope, $http){
 
-  $scope.searchTerm = "";
-  $scope.results = [];
+  $scope.messages = [];
 
-  $scope.$watch('searchTerm', function(_new, _old){
-    if(_new == undefined || _new.length == 0) _new = "";
+  getMessages();
 
-    getItemsForSearchTerm(_new)
+  $scope.saveNewMessage = function(){
 
-  });
+    var message = $scope.newMessage;
+    var userId = parseInt($scope.userId, 10);
+
+    $http.post('/message', {message: message, userId: userId}).then(function(res){
+      console.log('here is the response from saving a new message', res);
+      getMessages();
+    });
+
+    $scope.newMessage = "";
+  };
 
 
-  function getItemsForSearchTerm(term){
-    $http.get('/search/'+term)
-      .then(function(res){
-        $scope.results = res.data;
-      });
+  function getMessages(){
+    $http.get('/messages').then(function(res){
+      $scope.messages = res.data;
+    });
   }
-
 
 });
