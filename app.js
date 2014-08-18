@@ -44,6 +44,7 @@ app.post('/user', function(req, res){
   connection.query('INSERT INTO `test`.`users` (username, email) VALUES (\''+username+'\',\''+email+'\')', function(err, rows, fields) {
     if (err) throw err;
     console.log('user added: ', username, email);
+    res.send('worked');
   });
 
 });
